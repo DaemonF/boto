@@ -15,6 +15,8 @@ $ FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
   - `boto tell MESSAGE` - Sends the message to the default group.
   - `boto kitteh` - Replies with a random cute cat.
   - `boto pug me` - Replies with a random pug.
+  - `boto rocket` - Replies with a random rocket.
+  - `boto rocket man` - Replies with a random rocket man.
   
 # Enviornment variables
   - `FB_USER` - The username to login with.
