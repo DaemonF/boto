@@ -1,7 +1,13 @@
 # To run
-From the same directory as the script run:
+To install the fbchat dependency:
+```bash
+$ sudo apt-get install python-pip
+$ sudo pip install fbchat
 ```
-FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
+
+From the same directory as the script run:
+```bash
+$ FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
 ```
 
 # Commands
