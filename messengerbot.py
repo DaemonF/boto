@@ -6,6 +6,10 @@ import random
 from fbchat import Client, log
 from fbchat.models import *
 
+def randomLineFrom(filename):
+  with open(filename, 'r') as f:
+    return random.choice(f.readlines()).strip()
+
 class Bot(Client):
   def onMessage(self, author_id, message_object, thread_id, thread_type, **kwargs):
     self.markAsDelivered(author_id, thread_id)
@@ -26,11 +30,13 @@ class Bot(Client):
         to = os.environ['FB_DEFAULT_GROUP']
         type = ThreadType.GROUP
       elif text.startswith('boto pug me'):
-        with open('./pugs.txt', 'r') as f:
-          image_url = random.choice(f.readlines()).strip()
+        image_url = randomLineFrom('./pugs.txt')
       elif text.startswith('boto kitteh'):
-        with open('./kitteh.txt', 'r') as f:
-          image_url = random.choice(f.readlines()).strip()
+        image_url = randomLineFrom('./kitteh.txt')
+      elif text.startswith('boto rocket man'):
+        image_url = randomLineFrom('./rocketmans.txt')
+      elif text.startswith('boto rocket'):
+        image_url = randomLineFrom('./rockets.txt')
 
       if image_url:
         self.sendRemoteImage(image_url, thread_id=to, thread_type=type)
