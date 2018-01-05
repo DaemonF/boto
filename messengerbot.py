@@ -23,7 +23,9 @@ class Bot(Client):
       text = message_object.text
       reply = None
       image_url = None
-      if text.startswith('boto echo'):
+      if text.startswith('boto help'):
+        reply = "See https://github.com/DaemonF/boto/blob/master/README.md#commands"
+      elif text.startswith('boto echo'):
         reply = text.replace('boto echo ', '')
       elif text.startswith('boto tell'):
         reply = text.replace('boto tell ', '')
