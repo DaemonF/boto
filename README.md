@@ -11,6 +11,7 @@ $ FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
 ```
 
 # Commands
+  - `boto help` - Links to this README file.
   - `boto echo MESSAGE` - Replies with the message.
   - `boto tell MESSAGE` - Sends the message to the default group.
   - `boto kitteh` - Replies with a random cute cat.
