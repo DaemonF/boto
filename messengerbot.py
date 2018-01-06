@@ -61,7 +61,7 @@ class Bot(Client):
       try:
         text = message_object.text
         name = 'boto'
-        if text.lower().startswith(f'{name} '):
+        if text and text.lower().startswith(f'{name} '):
           if author_id not in self.userCache:
             self.userCache[author_id] = self.fetchUserInfo(author_id)[author_id]
           author_name = self.userCache[author_id].first_name
