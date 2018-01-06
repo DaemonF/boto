@@ -14,13 +14,13 @@ def randomLineFrom(filename):
 
 def loadPoints(thread_id):
   try:
-    with open(f'./points-{thread_id}.json', 'r') as f:
+    with open(f'./data/points-{thread_id}.json', 'r') as f:
       return json.loads(f.read())
   except:
     return {}
 
 def storePoints(points, thread_id):
-  with open(f'./points-{thread_id}.json', 'w') as f:
+  with open(f'./data/points-{thread_id}.json', 'w') as f:
     f.write(json.dumps(points))
 
 def formatPoints(key, value):
