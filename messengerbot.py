@@ -98,7 +98,7 @@ class Bot(Client):
             return replyImage(randomLineFrom('./rockets.txt'))
           elif text.startswith('++'):
             thing = text.replace('++', '').strip().lower()
-            if thing == author_name.strip().lower():
+            if author_name.strip().lower() in thing:
               return reply(f"Fuck you, {author_name}.")
             points = loadPoints(thread_id)
             points[thing] = points.get(thing, 0) + 1
