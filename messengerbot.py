@@ -159,7 +159,7 @@ class Bot(Client):
             storePoints(points, thread_id)
             return reply(f'Huh? What\'s {thing}? I know nothing about {thing}.')
           else:
-            return reply('I\'m sorry Dave, I can\'t do that.')
+            return reply(f'I\'m sorry {author_name}, I can\'t do that.')
       except:
         reply('X_X')
         raise
