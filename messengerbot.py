@@ -9,9 +9,16 @@ from fbchat.models import *
 
 random.seed()
 
-def randomLineFrom(filename):
+def randomLineFrom(filename, count=1):
   with open(filename, 'r') as f:
-    return random.choice(f.readlines()).strip()
+    lines = f.readlines()
+    if count == 1:
+      return random.choice(lines).strip()
+    elif count > 1:
+      random.shuffle(lines)
+      return map(lambda line: line.strip(), lines[:count])
+    else:
+      raise ValueError("count must be >= 1")
 
 def loadPoints(thread_id):
   try:
@@ -82,14 +89,14 @@ class Bot(Client):
             log.info(f'Telling defualt group:\n{indent(msg)}')
             return self.send(Message(text=msg), thread_id=os.environ['FB_DEFAULT_GROUP'], thread_type=ThreadType.GROUP)
           elif text.startswith('pug bomb'):
-            for i in range(5):
-              replyImage(randomLineFrom('./pugs.txt'))
+            for image_url in randomLineFrom('./pugs.txt', count=5):
+              replyImage(image_url)
             return
           elif text.startswith('pug me'):
             return replyImage(randomLineFrom('./pugs.txt'))
           elif text.startswith('kitteh bomb'):
-            for i in range(5):
-              replyImage(randomLineFrom('./kitteh.txt'))
+            for image_url in randomLineFrom('./kitteh.txt', count=5):
+              replyImage(image_url)
             return
           elif text.startswith('kitteh'):
             return replyImage(randomLineFrom('./kitteh.txt'))
