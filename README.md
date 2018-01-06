@@ -15,9 +15,14 @@ $ FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
   - `boto echo MESSAGE` - Replies with the message.
   - `boto tell MESSAGE` - Sends the message to the default group.
   - `boto kitteh` - Replies with a random cute cat.
+  - `boto kitteh bomb` - Replies with several random cute cats.
   - `boto pug me` - Replies with a random pug.
+  - `boto pug bomb` - Replies with several random pugs.
   - `boto rocket` - Replies with a random rocket.
   - `boto rocket man` - Replies with a random rocket man.
+  - `boto ++SOME PHRASE` - Gives SOME PHRASE a point.
+  - `boto --SOME PHRASE` - Takes a point from SOME PHRASE.
+  - `boto points` - Displays all current points.
   
 # Enviornment variables
   - `FB_USER` - The username to login with.
