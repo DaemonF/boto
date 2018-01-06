@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import re
 import os
 import json
 import random
@@ -75,9 +76,9 @@ class Bot(Client):
           if text.startswith('help'):
             return reply('Documentation at:\nhttps://github.com/DaemonF/boto/blob/master/README.md#commands')
           elif text.startswith('echo'):
-            return reply(text.replace('echo ', ''))
-          elif text.startswith('tell '):
-            msg = text.replace('tell ', '')
+            return reply(text.replace('echo', '').strip())
+          elif text.startswith('tell'):
+            msg = text.replace('tell', '').strip()
             log.info(f'Telling defualt group:\n{indent(msg)}')
             return self.send(Message(text=msg), thread_id=os.environ['FB_DEFAULT_GROUP'], thread_type=ThreadType.GROUP)
           elif text.startswith('pug bomb'):
@@ -118,6 +119,38 @@ class Bot(Client):
             for key, value in points.items():
               msg += formatPoints(key, value) + '\n'
             return reply(msg)
+          elif text.startswith('+='):
+            match = re.match(r'\+=([0-9]+) (.*)', text)
+            if len(match.groups()) != 2:
+              return reply(f'Bad format. Must be "{name} +=NUM SOME PHRASE"')
+            increment = int(match.group(1))
+            if increment <= 0:
+              return reply(f'Value must be greater than 0.')
+            thing = match.group(2).strip().lower()
+            if author_name.strip().lower() in thing:
+              return reply(f"Fuck you, {author_name}.")
+            points = loadPoints(thread_id)
+            points[thing] = points.get(thing, 0) + increment
+            storePoints(points, thread_id)
+            return reply(formatPoints(thing, points[thing]))
+          elif text.startswith('-='):
+            match = re.match(r'\-=([0-9]+) (.*)', text)
+            if len(match.groups()) != 2:
+              return reply(f'Bad format. Must be "{name} -=NUM SOME PHRASE"')
+            increment = int(match.group(1))
+            if increment <= 0:
+              return reply(f'Value must be greater than 0.')
+            thing = match.group(2).strip().lower()
+            points = loadPoints(thread_id)
+            points[thing] = points.get(thing, 0) - increment
+            storePoints(points, thread_id)
+            return reply(formatPoints(thing, points[thing]))
+          elif text.startswith('forget about'):
+            thing = text.replace('forget about', '').strip().lower()
+            points = loadPoints(thread_id)
+            del points[thing]
+            storePoints(points, thread_id)
+            return reply(f'Huh? What\'s {thing}? I know nothing about {thing}.')
           else:
             return reply('I\'m sorry Dave, I can\'t do that.')
       except:

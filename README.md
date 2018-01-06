@@ -20,9 +20,12 @@ $ FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
   - `boto pug bomb` - Replies with several random pugs.
   - `boto rocket` - Replies with a random rocket.
   - `boto rocket man` - Replies with a random rocket man.
-  - `boto ++SOME PHRASE` - Gives SOME PHRASE a point.
+  - `boto ++SOME PHRASE` - Gives a point to SOME PHRASE.
+  - `boto +=NUM SOME PHRASE` - Gives NUM points to SOME PHRASE.
   - `boto --SOME PHRASE` - Takes a point from SOME PHRASE.
+  - `boto -=NUM SOME PHRASE` - Takes NUM points away from SOME PHRASE.
   - `boto points` - Displays all current points.
+  - `boto forget about SOME PHRASE` - Removes SOME PHRASE from the points record.
   
 # Enviornment variables
   - `FB_USER` - The username to login with.
