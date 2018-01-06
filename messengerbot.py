@@ -112,6 +112,8 @@ class Bot(Client):
             return reply(formatPoints(thing, points[thing]))
           elif text.startswith('points'):
             points = loadPoints(thread_id)
+            if len(points) == 0:
+              return reply('No points.')
             msg = ''
             for key, value in points.items():
               msg += formatPoints(key, value) + '\n'
