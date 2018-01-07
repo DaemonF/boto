@@ -114,8 +114,8 @@ class Bot(Client):
             return reply(msg)
           elif text.startswith('+'):
             match = re.match(r'\+([0-9]+) (.*)', text)
-            if len(match.groups()) != 2:
-              return reply(f'Bad format. Must be "{name} +=NUM SOME PHRASE"')
+            if not (match and len(match.groups()) == 2):
+              return reply(f'Bad format. Must be "{name} +NUM SOME PHRASE"')
             increment = int(match.group(1))
             if increment <= 0:
               return reply(f'Value must be greater than 0.')
@@ -128,8 +128,8 @@ class Bot(Client):
             return reply(formatPoints(thing, points[thing]))
           elif text.startswith('-'):
             match = re.match(r'\-([0-9]+) (.*)', text)
-            if len(match.groups()) != 2:
-              return reply(f'Bad format. Must be "{name} -=NUM SOME PHRASE"')
+            if not (match and len(match.groups()) == 2):
+              return reply(f'Bad format. Must be "{name} -NUM SOME PHRASE"')
             increment = int(match.group(1))
             if increment <= 0:
               return reply(f'Value must be greater than 0.')
