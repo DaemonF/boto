@@ -104,20 +104,6 @@ class Bot(Client):
             return replyImage(randomLineFrom('./rocketmans.txt'))
           elif text.startswith('rocket'):
             return replyImage(randomLineFrom('./rockets.txt'))
-          elif text.startswith('++'):
-            thing = text.replace('++', '').strip().lower()
-            if author_name.strip().lower() in thing:
-              return reply(f"Fuck you, {author_name}.")
-            points = loadPoints(thread_id)
-            points[thing] = points.get(thing, 0) + 1
-            storePoints(points, thread_id)
-            return reply(formatPoints(thing, points[thing]))
-          elif text.startswith('--'):
-            thing = text.replace('--', '').strip().lower()
-            points = loadPoints(thread_id)
-            points[thing] = points.get(thing, 0) - 1
-            storePoints(points, thread_id)
-            return reply(formatPoints(thing, points[thing]))
           elif text.startswith('points'):
             points = loadPoints(thread_id)
             if len(points) == 0:
@@ -126,8 +112,8 @@ class Bot(Client):
             for key, value in points.items():
               msg += formatPoints(key, value) + '\n'
             return reply(msg)
-          elif text.startswith('+='):
-            match = re.match(r'\+=([0-9]+) (.*)', text)
+          elif text.startswith('+'):
+            match = re.match(r'\+([0-9]+) (.*)', text)
             if len(match.groups()) != 2:
               return reply(f'Bad format. Must be "{name} +=NUM SOME PHRASE"')
             increment = int(match.group(1))
@@ -140,8 +126,8 @@ class Bot(Client):
             points[thing] = points.get(thing, 0) + increment
             storePoints(points, thread_id)
             return reply(formatPoints(thing, points[thing]))
-          elif text.startswith('-='):
-            match = re.match(r'\-=([0-9]+) (.*)', text)
+          elif text.startswith('-'):
+            match = re.match(r'\-([0-9]+) (.*)', text)
             if len(match.groups()) != 2:
               return reply(f'Bad format. Must be "{name} -=NUM SOME PHRASE"')
             increment = int(match.group(1))
