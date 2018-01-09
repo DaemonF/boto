@@ -22,6 +22,7 @@ $ FB_USER=<USER> FB_PASS=<PASS> FB_DEFAULT_GROUP=<GROUP_ID> ./messengerbot.py
     - `boto pug bomb` - Replies with several random pugs.
     - `boto rocket` - Replies with a random rocket.
     - `boto rocket man` - Replies with a random rocket man.
+    - `boto show X the door` - Replies with a picture of a door.
   - Points
     - `boto +NUM THING` - Gives NUM points to THING. THING can have spaces.
     - `boto -NUM THING` - Takes NUM points away from THING. THING can have spaces.

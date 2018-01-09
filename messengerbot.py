@@ -67,8 +67,8 @@ class Bot(Client):
     if author_id != self.uid:
       try:
         text = message_object.text
-        name = 'boto'
-        if text and text.lower().startswith(f'{name} '):
+        wake_word_regex = r'boto,? '
+        if text and re.match(wake_word_regex, text, re.IGNORECASE):
           if author_id not in self.userCache:
             self.userCache[author_id] = self.fetchUserInfo(author_id)[author_id]
           author_name = self.userCache[author_id].first_name
@@ -78,7 +78,7 @@ class Bot(Client):
           thread_name = self.threadCache[thread_id].name
 
           log.info(f'\n{author_name} in thread {thread_name} said:\n{indent(text)}')
-          text = text[len(name) + 1:]
+          text = re.sub(wake_word_regex, '', text, flags=re.IGNORECASE)
 
           if text.startswith('help'):
             return reply('Documentation at:\nhttps://github.com/DaemonF/boto/blob/master/README.md#commands')
@@ -144,6 +144,8 @@ class Bot(Client):
             del points[thing]
             storePoints(points, thread_id)
             return reply(f'Huh? What\'s {thing}? I know nothing about {thing}.')
+          elif re.match(r'show (.*) the door', text.lower()):
+             return replyImage('https://energy.gov/sites/prod/files/styles/borealis_photo_gallery_large_respondxl/public/door_5481543.jpg')
           else:
             return reply(f'I\'m sorry {author_name}, I can\'t do that.')
       except:
