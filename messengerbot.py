@@ -67,7 +67,7 @@ class Bot(Client):
     if author_id != self.uid:
       try:
         text = message_object.text
-        wake_word_regex = r'boto,? '
+        wake_word_regex = r'^boto,? '
         if text and re.match(wake_word_regex, text, re.IGNORECASE):
           if author_id not in self.userCache:
             self.userCache[author_id] = self.fetchUserInfo(author_id)[author_id]
@@ -83,9 +83,9 @@ class Bot(Client):
           if text.startswith('help'):
             return reply('Documentation at:\nhttps://github.com/DaemonF/boto/blob/master/README.md#commands')
           elif text.startswith('echo'):
-            return reply(text.replace('echo', '').strip())
+            return reply(text.replace('echo', '', 1).strip())
           elif text.startswith('tell'):
-            msg = text.replace('tell', '').strip()
+            msg = text.replace('tell', '', 1).strip()
             log.info(f'Telling defualt group:\n{indent(msg)}')
             return self.send(Message(text=msg), thread_id=os.environ['FB_DEFAULT_GROUP'], thread_type=ThreadType.GROUP)
           elif text.startswith('pug bomb'):
@@ -139,7 +139,7 @@ class Bot(Client):
             storePoints(points, thread_id)
             return reply(formatPoints(thing, points[thing]))
           elif text.startswith('forget about'):
-            thing = text.replace('forget about', '').strip().lower()
+            thing = text.replace('forget about', '', 1).strip().lower()
             points = loadPoints(thread_id)
             del points[thing]
             storePoints(points, thread_id)
