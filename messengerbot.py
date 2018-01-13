@@ -88,7 +88,7 @@ class Bot(Client):
             msg = text.replace('tell', '', 1).strip()
             log.info(f'Telling defualt group:\n{indent(msg)}')
             self.send(Message(text=msg), thread_id=os.environ['FB_DEFAULT_GROUP'], thread_type=ThreadType.GROUP)
-            return reply('Mischeif managed.')
+            return reply('Mischief managed.')
           elif text.startswith('pug bomb'):
             for image_url in randomLineFrom('./pugs.txt', count=5):
               replyImage(image_url)
