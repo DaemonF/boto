@@ -87,7 +87,8 @@ class Bot(Client):
           elif text.startswith('tell'):
             msg = text.replace('tell', '', 1).strip()
             log.info(f'Telling defualt group:\n{indent(msg)}')
-            return self.send(Message(text=msg), thread_id=os.environ['FB_DEFAULT_GROUP'], thread_type=ThreadType.GROUP)
+            self.send(Message(text=msg), thread_id=os.environ['FB_DEFAULT_GROUP'], thread_type=ThreadType.GROUP)
+            return reply('Mischeif managed.')
           elif text.startswith('pug bomb'):
             for image_url in randomLineFrom('./pugs.txt', count=5):
               replyImage(image_url)
@@ -145,7 +146,8 @@ class Bot(Client):
             storePoints(points, thread_id)
             return reply(f'Huh? What\'s {thing}? I know nothing about {thing}.')
           elif re.match(r'show (.*) the door', text.lower()):
-             return replyImage('https://energy.gov/sites/prod/files/styles/borealis_photo_gallery_large_respondxl/public/door_5481543.jpg')
+             replyImage('https://energy.gov/sites/prod/files/styles/borealis_photo_gallery_large_respondxl/public/door_5481543.jpg')
+             return reply('Excuse me sir, right this way.')
           else:
             return reply(f'I\'m sorry {author_name}, I can\'t do that.')
       except:
