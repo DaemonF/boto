@@ -178,7 +178,7 @@ class SorryDaveHandler(Handler):
 
 class Xkcd37Handler(Handler):
     def couldHandle(self, msg: Message):
-        return re.search(r'([a-z]+)-(ass) ([a-z]+)', msg.text, re.IGNORECASE)
+        return re.search(r'([a-z]+)-(ass) ([a-z]+)', msg.text, re.IGNORECASE) and random.randint(0, 100) < 20
 
     def handle(self, msg: Message, client: Client):
         match = re.search(r'([a-z]+)-(ass) ([a-z]+)', msg.text, re.IGNORECASE)
